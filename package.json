@@ -1,7 +1,7 @@
 {
   "name": "falsey",
-  "description": "Returns true if `value` is falsey. Strings, arrays and `arguments` objects with a length of `0`, and objects with no own enumerable properties are considered falsey.",
-  "version": "0.1.0",
+  "description": "Returns true if `value` is falsey. Works for strings, arrays and `arguments` objects with a length of `0`, and objects with no own enumerable properties are considered falsey.",
+  "version": "0.2.1",
   "homepage": "https://github.com/jonschlinkert/falsey",
   "author": {
     "name": "Jon Schlinkert",
@@ -14,12 +14,26 @@
   "bugs": {
     "url": "https://github.com/jonschlinkert/falsey/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jonschlinkert/falsey/blob/master/LICENSE-MIT"
-    }
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/jonschlinkert/falsey/blob/master/LICENSE"
+  },
+  "files": [
+    "index.js"
   ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "kind-of": "^1.1.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
   "keywords": [
     "falsey",
     "false",
@@ -33,16 +47,5 @@
     "arguments",
     "args",
     "undefined"
-  ],
-  "main": "index.js",
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "mocha -R spec"
-  },
-  "devDependencies": {
-    "verb": ">= 0.2.6",
-    "mocha": "*"
-  }
+  ]
 }
