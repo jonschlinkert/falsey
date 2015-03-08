@@ -1,47 +1,28 @@
 /*!
  * falsey <https://github.com/jonschlinkert/falsey>
  *
- * Copyright (c) 2014 Jon Schlinkert, contributors.
- * Licensed under the MIT License
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 'use strict';
 
-function typeOf(val) {
-  return toString.call(val)
-    .toLowerCase()
-    .replace(/\[object ([\w]+)\]/, '$1');
-}
+var typeOf = require('kind-of');
 
-function isArguments(obj) {
-  return obj
-    && (typeof obj === 'object')
-    && (typeof obj.length === 'number')
-    && (typeOf(obj) === 'arguments') || false;
-}
-
-/**
- * ## falsey
- *
- * Return `true` if value is falsey.
- *
- * @param  {*} `value` Any type of value.
- * @param  {Array} `arr` Array of keywords to evaluate as falsey.
- * @return {Boolean}
- */
-
-module.exports = function(value, arr) {
-  // override these by passing an array as a second param
-  var falsey = ['false', 'none', 'nil', 'null'];
-
-  if (isArguments(value)) {
-    return !Boolean(Object.keys(value).length);
+module.exports = function falsey(val, arr) {
+  var defaults = ['none', 'nil'];
+  if (val === 'false' || val === false) {
+    return true;
   }
-  if (typeOf(value) === 'object') {
-    return !Boolean(Object.keys(value).length);
+  if (Array.isArray(val) || typeOf(val) === 'arguments') {
+    return !val.length;
   }
-  if (Array.isArray(value)) {
-    return !Boolean(value.length);
+  if (typeOf(val) === 'object') {
+    return !Object.keys(val).length;
   }
-  return !Boolean(value) || (arr || falsey).indexOf(value) !== -1;
+  if (val === '0' || val === 0) {
+    return true;
+  }
+  return !val || (arr || defaults).indexOf(val) !== -1;
 };
+
