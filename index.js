@@ -14,7 +14,7 @@ module.exports = function falsey(val, arr) {
   if (val === 'false' || val === false) {
     return true;
   }
-  if (Array.isArray(val) || typeOf(val) === 'arguments') {
+  if ((Array.isArray && Array.isArray(val)) || typeOf(val) === 'arguments') {
     return !val.length;
   }
   if (typeOf(val) === 'object') {
