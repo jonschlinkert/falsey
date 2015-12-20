@@ -9,20 +9,24 @@
 
 var typeOf = require('kind-of');
 
-module.exports = function falsey(val, arr) {
-  var defaults = ['none', 'nil'];
-  if (val === 'false' || val === false) {
-    return true;
-  }
+module.exports = function falsey(val, keywords) {
+  if (!val) return true;
+
   if (Array.isArray(val) || typeOf(val) === 'arguments') {
     return !val.length;
   }
+
   if (typeOf(val) === 'object') {
     return !Object.keys(val).length;
   }
-  if (val === '0' || val === 0) {
-    return true;
-  }
-  return !val || (arr || defaults).indexOf(val) !== -1;
+
+  var arr = !keywords
+    ? ['none', 'nil', 'nope', 'no', 'nada', '0', 'false']
+    : arrayify(keywords);
+
+  return arr.indexOf(val) !== -1;
 };
 
+function arrayify(val) {
+  return Array.isArray(val) ? val : [val];
+}
