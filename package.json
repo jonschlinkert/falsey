@@ -1,7 +1,7 @@
 {
   "name": "falsey",
   "description": "Returns true if `value` is falsey. Works for strings, arrays and `arguments` objects with a length of `0`, and objects with no own enumerable properties are considered falsey.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/jonschlinkert/falsey",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/falsey",
