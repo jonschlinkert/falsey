@@ -1,20 +1,25 @@
-# falsey [![NPM version](https://badge.fury.io/js/falsey.svg)](http://badge.fury.io/js/falsey)  [![Build Status](https://travis-ci.org/jonschlinkert/falsey.svg)](https://travis-ci.org/jonschlinkert/falsey) 
+# falsey [![NPM version](https://img.shields.io/npm/v/falsey.svg)](https://www.npmjs.com/package/falsey) [![Build Status](https://img.shields.io/travis/jonschlinkert/falsey.svg)](https://travis-ci.org/jonschlinkert/falsey)
 
 > Returns true if `value` is falsey. Works for strings, arrays and `arguments` objects with a length of `0`, and objects with no own enumerable properties are considered falsey.
 
-## Install with [npm](npmjs.org)
+## Install
 
-```bash
-npm i falsey --save
+Install with [npm](https://www.npmjs.com/)
+
+```sh
+$ npm i falsey --save
 ```
 
-What makes this lib unique is the option to pass an array of values that should always evuate as "falsey". For example, you might want to allow users to define `nil` or `nope` to disable something. 
+What makes this lib unique (and fun) is the option to pass an array of values that should always evuate as "falsey".
+
+This is useful for CLI prompts, web forms, etc. For example, you might want to allow users to define `nil` or `nope` to disable something.
 
 ## Usage
 
 ```js
 var isFalsey = require('falsey');
-console.log(isFalsey('');
+
+console.log(isFalsey('nil');
 //=> `true`
 ```
 
@@ -26,73 +31,85 @@ All of the following return `true`
 isFalsey(undefined);
 isFalsey(null);
 isFalsey(false);
-!isFalsey(true);
 isFalsey(0);
-!isFalsey(1);
 isFalsey('');
-!isFalsey('1');
 isFalsey(NaN);
 isFalsey({});
-!isFalsey({a: 'b'});
 isFalsey([]);
-!isFalsey([0]);
+```
+
+All of the following return `false`:
+
+```js
+isFalsey('foo');
+isFalsey(true);
+isFalsey(50);
+isFalsey('10');
+isFalsey({a: 'b'});
+isFalsey([0]);
 ```
 
 ### Special cases
 
-There are only four "special cases", `['false', 'none', 'nil', 'null]`, and these are easily overridden by passing a value as a second parameter, e.g.
+There are several additional "falsey" words built in, but these can be overridden or turned off by passing a value as the second argument.
+
+**Built-in additional falsey keywords**
+
+* `none`
+* `nil`
+* `nope`
+* `no`
+* `nada`
+* `0`
+* `false`
+
+**Disable additions**
 
 ```js
-isFalsey(foo, []);
-
-// other examples...
-isFalsey('false');
-!isFalsey('false', []); // override special cases
-!isFalsey('true');
-isFalsey('nil');
-!isFalsey('nil', []); // override special cases
-isFalsey('none');
-!isFalsey('none', []); // override special cases
-isFalsey('null');
-!isFalsey('null', []); // override special cases
+isFalsey('nil', []);
+//=> false
 ```
 
-Or, pass an array of values that should return `true` when evaluated as _falsey_:
+**Customize additions**
+
+Pass one or more keywords that should return `true` when evaluated as _falsey_:
 
 ```js
-isFalsey(foo, ['no', 'nope', 'nada', 'zilch']);
-// you get the point
+isFalsey('zilch', ['no', 'nope', 'nada', 'zilch']);
+//=> true
 ```
 
 ## Related
-* [is-primitive](https://github.com/jonschlinkert/is-primitive): Returns `true` if the value is a primitive. 
-* [is-number](https://github.com/jonschlinkert/is-number): Returns true if the value is a number. comprehensive tests.
-* [isobject](https://github.com/jonschlinkert/isobject): Returns true if the value is an object and not an array or null.
-* [kind-of](https://github.com/jonschlinkert/kind-of): Get the native type of a value.
+
+* [is-number](https://www.npmjs.com/package/is-number): Returns true if the value is a number. comprehensive tests. | [homepage](https://github.com/jonschlinkert/is-number)
+* [is-primitive](https://www.npmjs.com/package/is-primitive): Returns `true` if the value is a primitive.  | [homepage](https://github.com/jonschlinkert/is-primitive)
+* [isobject](https://www.npmjs.com/package/isobject): Returns true if the value is an object and not an array or null. | [homepage](https://github.com/jonschlinkert/isobject)
+* [kind-of](https://www.npmjs.com/package/kind-of): Get the native type of a value. | [homepage](https://github.com/jonschlinkert/kind-of)
 
 ## Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/falsey/issues)
 
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/falsey/issues/new).
 
 ## Running tests
-Install dev dependencies.
 
-```bash
-npm i -d && npm test
+Install dev dependencies:
+
+```sh
+$ npm i -d && npm test
 ```
-
 
 ## Author
 
 **Jon Schlinkert**
- 
-+ [github/jonschlinkert](https://github.com/jonschlinkert)
-+ [twitter/jonschlinkert](http://twitter.com/jonschlinkert) 
+
+* [github/jonschlinkert](https://github.com/jonschlinkert)
+* [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
 ## License
-Copyright (c) 2015 Jon Schlinkert  
-Released under the MIT license
+
+Copyright © 2015 [Jon Schlinkert](https://github.com/jonschlinkert)
+Released under the MIT license.
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on March 07, 2015._
+_This file was generated by [verb](https://github.com/verbose/verb) on December 20, 2015._
