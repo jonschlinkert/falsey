@@ -24,7 +24,7 @@ module.exports = function falsey(val, keywords) {
     ? ['none', 'nil', 'nope', 'no', 'nada', '0', 'false']
     : arrayify(keywords);
 
-  return arr.indexOf(val) !== -1;
+  return arr.indexOf(val.toLoweCase ? val.toLowerCase() : val) !== -1;
 };
 
 function arrayify(val) {
