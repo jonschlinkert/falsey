@@ -54,22 +54,27 @@ describe('falsey', function() {
 
   it('should return "falsey" for `nil`', function() {
     assert(isFalsey('nil'));
+    assert(isFalsey('NIL'));
   });
 
   it('should return "falsey" for `none`', function() {
     assert(isFalsey('none'));
+    assert(isFalsey('None'));
   });
 
   it('should return "falsey" for `nope`', function() {
     assert(isFalsey('nope'));
+    assert(isFalsey('nOPe'));
   });
 
   it('should return "falsey" for `no`', function() {
     assert(isFalsey('no'));
+    assert(isFalsey('NO'));
   });
 
   it('should return "falsey" for `nada`', function() {
     assert(isFalsey('nada'));
+    assert(isFalsey('Nada'));
   });
 
   it('should support custom "falsey" values', function() {
