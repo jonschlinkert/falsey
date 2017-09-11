@@ -79,6 +79,15 @@ isFalsey('zilch', ['no', 'nope', 'nada', 'zilch']);
 //=> true
 ```
 
+**Extend additions**
+
+Built-in keywords are exposed on the `.keywords` property. These can be used to extend the defaults:
+
+```js
+isFalsey('zilch', isFalsey.keywords.concat(['zilch']));
+//=> true
+```
+
 ## About
 
 ### Related projects
