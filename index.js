@@ -9,7 +9,7 @@
 
 var typeOf = require('kind-of');
 
-module.exports = function falsey(val, keywords) {
+function falsey(val, keywords) {
   if (!val) return true;
 
   if (Array.isArray(val) || typeOf(val) === 'arguments') {
@@ -21,12 +21,20 @@ module.exports = function falsey(val, keywords) {
   }
 
   var arr = !keywords
-    ? ['none', 'nil', 'nope', 'no', 'nada', '0', 'false']
+    ? falsey.keywords
     : arrayify(keywords);
 
   return arr.indexOf(val.toLowerCase ? val.toLowerCase() : val) !== -1;
-};
+}
+
+/**
+ * Expose `keywords`
+ */
+
+falsey.keywords = ['none', 'nil', 'nope', 'no', 'nada', '0', 'false'];
 
 function arrayify(val) {
   return Array.isArray(val) ? val : [val];
 }
+
+module.exports = falsey;
