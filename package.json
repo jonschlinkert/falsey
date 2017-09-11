@@ -23,6 +23,7 @@
     "kind-of": "^3.0.2"
   },
   "devDependencies": {
+    "gulp-format-md": "^1.0.0",
     "mocha": "*"
   },
   "keywords": [
@@ -50,6 +51,14 @@
     },
     "plugins": [
       "gulp-format-md"
-    ]
+    ],
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
