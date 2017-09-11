@@ -1,7 +1,7 @@
 /*!
  * falsey <https://github.com/jonschlinkert/falsey>
  *
- * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Copyright (c) 2014-2017, Jon Schlinkert.
  * Licensed under the MIT License.
  */
 
