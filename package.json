@@ -1,7 +1,7 @@
 {
   "name": "falsey",
   "description": "Returns true if the given is falsey (according to JavaScript) or matches a 'falsey' keyword.",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "homepage": "https://github.com/jonschlinkert/falsey",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/falsey",
