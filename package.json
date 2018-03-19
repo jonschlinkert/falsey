@@ -1,6 +1,6 @@
 {
   "name": "falsey",
-  "description": "Returns true if `value` is falsey. Works for strings, arrays and `arguments` objects with a length of `0`, and objects with no own enumerable properties are considered falsey.",
+  "description": "Returns true if the given is falsey (according to JavaScript) or matches a 'falsey' keyword.",
   "version": "0.3.2",
   "homepage": "https://github.com/jonschlinkert/falsey",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",

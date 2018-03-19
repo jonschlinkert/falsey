@@ -1,6 +1,8 @@
-# falsey [![NPM version](https://img.shields.io/npm/v/falsey.svg?style=flat)](https://www.npmjs.com/package/falsey) [![NPM monthly downloads](https://img.shields.io/npm/dm/falsey.svg?style=flat)](https://npmjs.org/package/falsey)  [![NPM total downloads](https://img.shields.io/npm/dt/falsey.svg?style=flat)](https://npmjs.org/package/falsey) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/falsey.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/falsey) [![Windows Build Status](https://img.shields.io/appveyor/ci/jonschlinkert/falsey.svg?style=flat&label=AppVeyor)](https://ci.appveyor.com/project/jonschlinkert/falsey)
+# falsey [![NPM version](https://img.shields.io/npm/v/falsey.svg?style=flat)](https://www.npmjs.com/package/falsey) [![NPM monthly downloads](https://img.shields.io/npm/dm/falsey.svg?style=flat)](https://npmjs.org/package/falsey) [![NPM total downloads](https://img.shields.io/npm/dt/falsey.svg?style=flat)](https://npmjs.org/package/falsey) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/falsey.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/falsey) [![Windows Build Status](https://img.shields.io/appveyor/ci/jonschlinkert/falsey.svg?style=flat&label=AppVeyor)](https://ci.appveyor.com/project/jonschlinkert/falsey)
 
-> Returns true if `value` is falsey. Works for strings, arrays and `arguments` objects with a length of `0`, and objects with no own enumerable properties are considered falsey.
+> Returns true if the given is falsey (according to JavaScript) or matches a 'falsey' keyword.
+
+Please consider following this project's author, [Jon Schlinkert](https://github.com/jonschlinkert), and consider starring the project to show your :heart: and support.
 
 ## Install
 
@@ -10,98 +12,123 @@ Install with [npm](https://www.npmjs.com/):
 $ npm install --save falsey
 ```
 
-What makes this lib unique (and fun) is the option to pass an array of values that should always evuate as "falsey".
+## What is this?
 
-This is useful for CLI prompts, web forms, etc. For example, you might want to allow users to define `nil` or `nope` to disable something.
+This is intended to be a fun way of accepting alternatives to `false` or "no" in CLI prompts, web forms, etc. For example, you might want to allow users to define `nil` or `nope` to disable something.
 
 ## Usage
 
 ```js
-var isFalsey = require('falsey');
+const falsey = require('falsey');
 
-console.log(isFalsey('nil');
-//=> `true`
+console.log(falsey());       //=> true
+console.log(falsey(false));  //=> true
+console.log(falsey('nil'));  //=> true
+console.log(falsey('nope')); //=> true
+console.log(falsey('yes'));  //=> false
 ```
 
 ## Examples
 
-All of the following return `true`
+Any value that is not falsey (according to JavaScript) _and is not in the list_ of [falsey keywords](#falsey-keywords) will return `false`:
 
 ```js
-isFalsey(undefined);
-isFalsey(null);
-isFalsey(false);
-isFalsey(0);
-isFalsey('');
-isFalsey(NaN);
-isFalsey({});
-isFalsey([]);
+falsey('abc');
+falsey(true);
+falsey(1);
+falsey('1');
+falsey({});
+falsey([]);
 ```
 
-All of the following return `false`:
+Any value that is falsey (according to JavaScript) _or is in the list_ of [falsey keywords](#falsey-keywords) will return `true`:
 
 ```js
-isFalsey('foo');
-isFalsey(true);
-isFalsey(50);
-isFalsey('10');
-isFalsey({a: 'b'});
-isFalsey([0]);
+falsey();          //=> true
+falsey('');        //=> true
+falsey(0);         //=> true
+falsey(false);     //=> true
+falsey(NaN);       //=> true
+falsey(null);      //=> true
+falsey(undefined); //=> true
+falsey(void 0);    //=> true
 ```
 
-### Special cases
+### Falsey keywords
 
-There are several additional "falsey" words built in, but these can be overridden or turned off by passing a value as the second argument.
+If a value matches one of the built-in "falsey" keywords (all strings) it will return `true`:
 
-**Built-in additional falsey keywords**
-
-* `none`
-* `nil`
-* `nope`
-* `no`
-* `nada`
 * `0`
 * `false`
+* `nada`
+* `nil`
+* `nay`
+* `nah`
+* `negative`
+* `no`
+* `none`
+* `nope`
+* `nul`
+* `null`
+* `nix`
+* `nyet`
+* `uh-uh`
+* `veto`
+* `zero`
 
-**Disable additions**
+**Customize falsey keywords**
+
+Pass an array of custom keywords that should return `true` when evaluated as _falsey_:
 
 ```js
-isFalsey('nil', []);
-//=> false
+falsey('zilch', ['no', 'nope', 'nada', 'zilch']); //=> true
 ```
 
-**Customize additions**
-
-Pass one or more keywords that should return `true` when evaluated as _falsey_:
+Disable built-in keywords by passing an empty array:
 
 ```js
-isFalsey('zilch', ['no', 'nope', 'nada', 'zilch']);
-//=> true
+falsey('nil', []); //=> false
 ```
 
-**Extend additions**
+**Extend built-in keywords**
 
-Built-in keywords are exposed on the `.keywords` property. These can be used to extend the defaults:
+Built-in keywords are exposed on the `.keywords` property so that you may extend them with your own keywords:
 
 ```js
-isFalsey('zilch', isFalsey.keywords.concat(['zilch']));
-//=> true
+falsey('zilch', falsey.keywords.concat(['zilch'])); //=> true
 ```
+
+## Release history
+
+### v1.0
+
+**Breaking changes**
+
+* objects will now always returns `false`
+* more words were added to the built-in list of [falsey keywords](#falsey-keywords)
 
 ## About
 
-### Related projects
-
-* [is-number](https://www.npmjs.com/package/is-number): Returns true if the value is a number. comprehensive tests. | [homepage](https://github.com/jonschlinkert/is-number "Returns true if the value is a number. comprehensive tests.")
-* [is-primitive](https://www.npmjs.com/package/is-primitive): Returns `true` if the value is a primitive.  | [homepage](https://github.com/jonschlinkert/is-primitive "Returns `true` if the value is a primitive. ")
-* [isobject](https://www.npmjs.com/package/isobject): Returns true if the value is an object and not an array or null. | [homepage](https://github.com/jonschlinkert/isobject "Returns true if the value is an object and not an array or null.")
-* [kind-of](https://www.npmjs.com/package/kind-of): Get the native type of a value. | [homepage](https://github.com/jonschlinkert/kind-of "Get the native type of a value.")
-
-### Contributing
+<details>
+<summary><strong>Contributing</strong></summary>
 
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
 
-### Building docs
+</details>
+
+<details>
+<summary><strong>Running Tests</strong></summary>
+
+Running and reviewing unit tests is a great way to get familiarized with a library and its API. You can install dependencies and run tests with the following command:
+
+```sh
+$ npm install && npm test
+```
+
+</details>
+
+<details>
+<summary><strong>Building docs</strong></summary>
 
 _(This project's readme.md is generated by [verb](https://github.com/verbose/verb-generate-readme), please don't edit the readme directly. Any changes to the readme must be made in the [.verb.md](.verb.md) readme template.)_
 
@@ -111,26 +138,38 @@ To generate the readme, run the following command:
 $ npm install -g verbose/verb#dev verb-generate-readme && verb
 ```
 
-### Running tests
+</details>
 
-Running and reviewing unit tests is a great way to get familiarized with a library and its API. You can install dependencies and run tests with the following command:
+### Related projects
 
-```sh
-$ npm install && npm test
-```
+You might also be interested in these projects:
+
+* [is-number](https://www.npmjs.com/package/is-number): Returns true if the value is a number. comprehensive tests. | [homepage](https://github.com/jonschlinkert/is-number "Returns true if the value is a number. comprehensive tests.")
+* [is-primitive](https://www.npmjs.com/package/is-primitive): Returns `true` if the value is a primitive.  | [homepage](https://github.com/jonschlinkert/is-primitive "Returns `true` if the value is a primitive. ")
+* [isobject](https://www.npmjs.com/package/isobject): Returns true if the value is an object and not an array or null. | [homepage](https://github.com/jonschlinkert/isobject "Returns true if the value is an object and not an array or null.")
+* [kind-of](https://www.npmjs.com/package/kind-of): Get the native type of a value. | [homepage](https://github.com/jonschlinkert/kind-of "Get the native type of a value.")
+
+### Contributors
+
+| **Commits** | **Contributor** | 
+| --- | --- |
+| 12 | [jonschlinkert](https://github.com/jonschlinkert) |
+| 9 | [doowb](https://github.com/doowb) |
+| 3 | [jesstelford](https://github.com/jesstelford) |
 
 ### Author
 
 **Jon Schlinkert**
 
-* [github/jonschlinkert](https://github.com/jonschlinkert)
-* [twitter/jonschlinkert](https://twitter.com/jonschlinkert)
+* [LinkedIn Profile](https://linkedin.com/in/jonschlinkert)
+* [GitHub Profile](https://github.com/jonschlinkert)
+* [Twitter Profile](https://twitter.com/jonschlinkert)
 
 ### License
 
-Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
+Copyright © 2018, [Jon Schlinkert](https://github.com/jonschlinkert).
 Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on September 11, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on March 18, 2018._
