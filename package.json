@@ -14,17 +14,14 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {
-    "kind-of": "^5.0.2"
-  },
   "devDependencies": {
     "gulp-format-md": "^1.0.0",
-    "mocha": "*"
+    "mocha": "^3.5.3"
   },
   "keywords": [
     "args",
@@ -41,6 +38,14 @@
     "value"
   ],
   "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
     "related": {
       "list": [
         "is-number",
@@ -49,14 +54,6 @@
         "kind-of"
       ]
     },
-    "plugins": [
-      "gulp-format-md"
-    ],
-    "toc": false,
-    "layout": "default",
-    "tasks": [
-      "readme"
-    ],
     "lint": {
       "reflinks": true
     }

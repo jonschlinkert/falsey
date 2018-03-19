@@ -1,40 +1,46 @@
 /*!
  * falsey <https://github.com/jonschlinkert/falsey>
  *
- * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Copyright (c) 2014-2018, Jon Schlinkert.
  * Released under the MIT License.
  */
 
 'use strict';
 
-var typeOf = require('kind-of');
-
 function falsey(val, keywords) {
   if (!val) return true;
-
-  if (Array.isArray(val) || typeOf(val) === 'arguments') {
-    return !val.length;
+  const words = keywords || falsey.keywords;
+  if (!Array.isArray(words)) words = [words];
+  const lower = typeof val === 'string' ? val.toLowerCase() : null;
+  for (const word of words) {
+    if (word === val) {
+      return true;
+    }
+    if (word === lower) {
+      return true;
+    }
   }
-
-  if (typeOf(val) === 'object') {
-    return !Object.keys(val).length;
-  }
-
-  var arr = !keywords
-    ? falsey.keywords
-    : arrayify(keywords);
-
-  return arr.indexOf(val.toLowerCase ? val.toLowerCase() : val) !== -1;
+  return false;
 }
 
-/**
- * Expose `keywords`
- */
-
-falsey.keywords = ['none', 'nil', 'nope', 'no', 'nada', '0', 'false'];
-
-function arrayify(val) {
-  return Array.isArray(val) ? val : [val];
-}
+falsey.keywords = [
+  '0',
+  'false',
+  'nada',
+  'nil',
+  'nay',
+  'nah',
+  'negative',
+  'no',
+  'none',
+  'nope',
+  'nul',
+  'null',
+  'nix',
+  'nyet',
+  'uh-uh',
+  'veto',
+  'zero'
+];
 
 module.exports = falsey;
