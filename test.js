@@ -15,20 +15,26 @@ describe('falsey', function() {
   it('should return false when truthy', function() {
     assert(!falsey('1'));
     assert(!falsey(1));
+    assert(!falsey([]));
     assert(!falsey([0]));
     assert(!falsey(true));
     assert(!falsey('true'));
+    assert(!falsey({}));
     assert(!falsey({a: 'b'}));
+    assert(!falsey(Infinity))
   });
 
   it('should return true when falsey', function() {
     assert(falsey(''));
+    assert(falsey('false'));
+    assert(falsey(' false '));
     assert(falsey('0'));
     assert(falsey(0));
     assert(falsey(false));
     assert(falsey(NaN));
     assert(falsey(null));
     assert(falsey(undefined));
+    assert(falsey());
   });
 
   it('should return "falsey" for `nil`', function() {
@@ -57,6 +63,9 @@ describe('falsey', function() {
   });
 
   it('should support custom "falsey" values', function() {
+    assert(falsey('nil', undefined));
+    assert(falsey('nil', null));
+    assert(falsey('nil', false));
     assert(!falsey('nil', []));
     assert(!falsey('none', []));
     assert(falsey('foo', ['foo', 'bar', 'baz']));
