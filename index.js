@@ -9,9 +9,9 @@
 
 function falsey(val, keywords) {
   if (!val) return true;
-  const words = keywords || falsey.keywords;
+  let words = keywords || falsey.keywords;
   if (!Array.isArray(words)) words = [words];
-  const lower = typeof val === 'string' ? val.toLowerCase() : null;
+  const lower = typeof val === 'string' ? val.trim().toLowerCase() : null;
   for (const word of words) {
     if (word === val) {
       return true;
