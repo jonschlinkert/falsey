@@ -39,6 +39,7 @@ falsey.keywords = [
   'nix',
   'nyet',
   'uh-uh',
+  'undefined',
   'veto',
   'zero'
 ];
