@@ -66,6 +66,7 @@ If a value matches one of the built-in "falsey" keywords (all strings) it will r
 * `nah`
 * `negative`
 * `no`
+* `non`
 * `none`
 * `nope`
 * `nul`
