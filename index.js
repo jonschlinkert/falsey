@@ -32,6 +32,7 @@ falsey.keywords = [
   'nah',
   'negative',
   'no',
+  'non',
   'none',
   'nope',
   'nul',
